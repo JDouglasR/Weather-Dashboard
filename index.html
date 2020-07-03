@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <title>Weather Dashboard</title>
+</head>
+<body>
+  <!--header-->
+  <header>
+    <nav class="navbar">
+      <span class="navbar-brand mb-0 h1" style="margin: auto;">Weather Dashboard</span>
+    </nav>
+  </header>
+  <!--search button-->
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="container-search">
+            <div class="card">
+              <div class="card-body">
+                <label for="citySearch" class="searchBar">Search for a city:</label><br>
+                <input type="text" id="citySearch" name="citySearch" placeholder="Enter City">
+                <button type="button" class="btn btn-sm btn-outline-primary" id="searchBtn">
+                  <span class="fa fa-search"></span>Search</button>
+                <ul class="list-group">
+                  <li class="list-group-item">Cras justo odio</li>
+                  <li class="list-group-item">Dapibus ac facilisis in</li>
+                  <li class="list-group-item">Morbi leo risus</li>
+                  <li class="list-group-item">Porta ac consectetur ac</li>
+                  <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="container-results">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="cityName" id="cityName"></div>
+                    <div class="cityDate" id="cityDate"></div>
+                    <div>Temperature:<span id="tempResult"></span></div><br>
+                    <div>Humidity:<span id="humResult"></span></div><br>
+                    <div>Wind Speed:<span id="windResult"></span></div><br>
+                    <div class="uvIndex">UV Index:<span id="uvResult"></span></div><br>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="container-days">
+                <div class="card">
+                  <div class="card-body">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+</html>

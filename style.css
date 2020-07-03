@@ -1,0 +1,64 @@
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+.navbar {
+    background-color: #169073;
+    color: #D5D6D6;
+}
+.navbar-brand {
+    display: inline-block;
+}
+
+.container-search {
+    width: 100%;
+    padding-top: 30px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    position: absolute;
+    box-sizing: border-box;
+}
+
+.cityName {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bolder;
+}
+
+.container-results,
+.container-days {
+    width: 100%;
+    padding-top: 30px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.list-group {
+    padding-top: 5px;
+}
+
+.uvIndexLow {
+  background-color: green;
+}
+
+.uvIndexMed {
+  background-color: yellow;
+}
+
+.uvIndexMod {
+  background-color: orange;
+}
+
+.uvIndexHigh {
+  background-color: red;
+}
+
+.uvIndexEx {
+  background-color: indigo;
+}

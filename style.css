@@ -17,48 +17,95 @@ body {
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    position: absolute;
+    position: relative;
     box-sizing: border-box;
+    display: inline-block;
 }
 
-.cityName {
+.cityName,
+.forecast {
   text-align: center;
   font-size: 2em;
   font-weight: bolder;
 }
 
-.container-results,
+.todaysDate {
+  text-align: center;
+  font-size: .8em;
+  padding-bottom: 5px;
+}
+
+.day {
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 30px;
+  height: 50px;
+}
+
+.container-results {
+  width: 100%;
+  padding-top: 30px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
 .container-days {
-    width: 100%;
-    padding-top: 30px;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-    position: relative;
-    box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  padding-top: 30px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.forecast {
+  width: 100%;
+  padding-top: 30px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+  display: inline-block;
 }
 
 .list-group {
-    padding-top: 5px;
+  padding-top: 5px;
+}
+
+.uvIndex {
+  border-radius: 33.3%;
 }
 
 .uvIndexLow {
   background-color: green;
+  color: white;
 }
 
 .uvIndexMed {
   background-color: yellow;
+  color: white;
 }
 
 .uvIndexMod {
   background-color: orange;
+  color: white;
 }
 
 .uvIndexHigh {
   background-color: red;
+  color: white;
 }
 
 .uvIndexEx {
   background-color: indigo;
+  color: white;
 }

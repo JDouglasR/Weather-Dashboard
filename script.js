@@ -1,38 +1,161 @@
-
-
-const displayCityWeather = () => {
+$(document).ready(function() {
     
-    var cityDate = moment().format('MMMM Do YYYY');
-    
-    var cityName = $("#citySearch").val()
-    var queryWeather = "https://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid=561936218884bf45974f29319f32b882";
+    // This function displays the weather to the page.
+    const displayCityWeather = () => {
 
-    $.ajax({
-        url: queryWeather,
-        method: "GET"
-      }).then(function(responseWeather) {
-          console.log(responseWeather);
-          $("#cityName").text(` ${responseWeather.name}`);
-          $("#tempResult").text( ` ${(((responseWeather.main.temp - 273.15) * 1.80 + 32).toFixed(2))} °F`);
-          $("#humResult").text(` ${responseWeather.main.humidity}%`);
-          $("#windResult").text(` ${responseWeather.wind.speed}mph`);
-          var lat = responseWeather.coord.lat;
-          var lon = responseWeather.coord.lon;
-          var queryUV = "http://api.openweathermap.org/data/2.5/uvi?appid=561936218884bf45974f29319f32b882&lat="+lat+"&lon="+lon+"";
-          $.ajax({
-              url: queryUV,
-              method: "GET"
-          }).then(function(responseUV)  {
-              console.log(responseUV);
-              $("#uvResult").text(` ${responseUV.value}`)
+        // Variables
+        var todaysDate = moment().format('MMMM Do YYYY');
+        var apiKey = "561936218884bf45974f29319f32b882";
+        var cityName = $("#citySearch").val()
+        var queryWeather = "https://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid="+apiKey;
+        var queryForecast = "https://api.openweathermap.org/data/2.5/forecast?q="+cityName+"&appid="+apiKey;
+
+        // This ajax call is used to gather weather data from an API and display it to the page.
+        $.ajax({
+            url: queryWeather,
+            method: "GET"
+          }).then(function(responseWeather) {
+              //console.log(responseWeather);
+              $("#cityName").text(` ${responseWeather.name}`);
+              $("#todaysDate").text(todaysDate);
+              $("#tempResult").text(` ${(((responseWeather.main.temp - 273.15) * 1.80 + 32).toFixed(2))} °F`);
+              $("#humResult").text(` ${responseWeather.main.humidity}%`);
+							$("#windResult").text(` ${responseWeather.wind.speed}mph`);
+							
+							// This is creating variables to represent an icon that corresponds with current weather and displaying it to the page.
+							// This also adds an alt tag to the picture for greater accessibility.
+							var iconCode = responseWeather.weather[0].icon;
+							var iconURL = "https://openweathermap.org/img/w/"+iconCode+".png";
+							$("#owmIcon").attr("src", iconURL).attr("alt", responseWeather.weather[0].description)
+
+              // Some local variables gathered from data from the first call to be used in a second nested ajax call. 
+              var lat = responseWeather.coord.lat;
+              var lon = responseWeather.coord.lon;
+              var queryUV = "https://api.openweathermap.org/data/2.5/uvi?appid="+apiKey+"&lat="+lat+"&lon="+lon+"";
+
+              // This ajax call is used to gather uv index data and display it to the page
+              $.ajax({
+                  url: queryUV,
+                  method: "GET"
+              }).then(function(responseUV)  {
+									//console.log(responseUV);
+									var uvIndex = responseUV.value;
+                  $("#uvResult").text(` ${responseUV.value}  `)
+
+                  // If statements to change the color of the uv index on the page.
+                  if (uvIndex >= 0 && uvIndex <= 2) {
+                    $("#uvResult").addClass("uvIndexLow");
+                    $("#uvResult").removeClass("uvIndexMed");
+                    $("#uvResult").removeClass("uvIndexMod");
+                    $("#uvResult").removeClass("uvIndexHigh");
+                    $("#uvResult").removeClass("uvIndexEx");
+                	}
+                	if (uvIndex >= 3 && uvIndex <= 5) {
+                	  $("#uvResult").removeClass("uvIndexLow");
+                	  $("#uvResult").addClass("uvIndexMed");
+                	  $("#uvResult").removeClass("uvIndexMod");
+                	  $("#uvResult").removeClass("uvIndexHigh");
+                	  $("#uvResult").removeClass("uvIndexEx");
+                	}
+                	if (uvIndex >= 6 && uvIndex <= 7) {
+                	  $("#uvResult").removeClass("uvIndexLow");
+                	  $("#uvResult").removeClass("uvIndexMed");
+                	  $("#uvResult").addClass("uvIndexMod");
+                	  $("#uvResult").removeClass("uvIndexHigh");
+                	  $("#uvResult").removeClass("uvIndexEx");
+                	}
+                	if (uvIndex >= 8 && uvIndex < 10) {
+                	  $("#uvResult").removeClass("uvIndexLow");
+                	  $("#uvResult").removeClass("uvIndexMed");
+                	  $("#uvResult").removeClass("uvIndexMod");
+                	  $("#uvResult").addClass("uvIndexHigh");
+                	  $("#uvResult").removeClass("uvIndexEx");
+                	};
+                	if (uvIndex >= 10 ) {
+                	  $("#uvResult").removeClass("uvIndexLow");
+                	  $("#uvResult").removeClass("uvIndexMed");
+                	  $("#uvResult").removeClass("uvIndexMod");
+                	  $("#uvResult").removeClass("uvIndexHigh");
+                	  $("#uvResult").addClass("uvIndexEx");
+                	};
+              });
+
           });
 
-      });
-}
+        // This ajax call is used to gather 5-day forecast data and display it to the page.
+        $.ajax({
+            url: queryForecast,
+            method: "GET"
+        }).then(function(responseForecast) {
+						console.log(responseForecast);
 
-$("#searchBtn").on("click",function(event){
-    event.preventDefault();
-    displayCityWeather();
+						//This sets the date for corresponding days to variables.
+						var date1 = moment(todaysDate, 'MMMM Do YYYY').add(1, 'days');
+						var date2 = moment(todaysDate, 'MMMM Do YYYY').add(2, 'days');
+						var date3 = moment(todaysDate, 'MMMM Do YYYY').add(3, 'days');
+						var date4 = moment(todaysDate, 'MMMM Do YYYY').add(4, 'days');
+						var date5 = moment(todaysDate, 'MMMM Do YYYY').add(5, 'days');
+
+						//This sets icons for corresponding days to variables.
+						var icon1 = "https://openweathermap.org/img/w/"+responseForecast.weather[4].icon+".png";
+						var icon2 = "https://openweathermap.org/img/w/"+responseForecast.weather[12].icon+".png";
+						var icon3 = "https://openweathermap.org/img/w/"+responseForecast.weather[20].icon+".png";
+						var icon4 = "https://openweathermap.org/img/w/"+responseForecast.weather[28].icon+".png";
+						var icon5 = "https://openweathermap.org/img/w/"+responseForecast.weather[36].icon+".png";
+
+						//This sets temperature for corresponding days to variables.
+						var temp1 = `Temp: ${(((responseForecast.list[4].main.temp - 273.15) * 1.80 + 32).toFixed(2))} °F`;
+						var temp2 = `Temp: ${(((responseForecast.list[12].main.temp - 273.15) * 1.80 + 32).toFixed(2))} °F`;
+						var temp3 = `Temp: ${(((responseForecast.list[20].main.temp - 273.15) * 1.80 + 32).toFixed(2))} °F`;
+						var temp4 = `Temp: ${(((responseForecast.list[28].main.temp - 273.15) * 1.80 + 32).toFixed(2))} °F`;
+						var temp5 = `Temp: ${(((responseForecast.list[36].main.temp - 273.15) * 1.80 + 32).toFixed(2))} °F`;
+						
+						//This sets humidity for corresponding days to variables.
+						var hum1 = `Humidity: ${responseForecast.list[4].main.humidity}%`;
+						var hum2 = `Humidity: ${responseForecast.list[12].main.humidity}%`;
+						var hum3 = `Humidity: ${responseForecast.list[20].main.humidity}%`;
+						var hum4 = `Humidity: ${responseForecast.list[28].main.humidity}%`;
+						var hum5 = `Humidity: ${responseForecast.list[36].main.humidity}%`;
+
+						//This displays correponding dates to the page.
+						$("#date1").text(date1);
+						$("#date2").text(date2);
+						$("#date3").text(date3);
+						$("#date4").text(date4);
+						$("#date5").text(date5);
+						
+						//This displays icons for corresponding days to the page.
+						$("#icon1").attr("src", icon1).attr("alt", responseWeather.weather[4].description)
+						$("#icon2").attr("src", icon2).attr("alt", responseWeather.weather[12].description)
+						$("#icon3").attr("src", icon3).attr("alt", responseWeather.weather[20].description)
+						$("#icon4").attr("src", icon4).attr("alt", responseWeather.weather[28].description)
+						$("#icon5").attr("src", icon5).attr("alt", responseWeather.weather[36].description)
+
+						//This displays temperature for corresponding days to the page.
+						$("#temp1").text(temp1);
+						$("#temp2").text(temp2);
+						$("#temp3").text(temp3);
+						$("#temp4").text(temp4);
+						$("#temp5").text(temp5);
+
+						//This displays humidity for corresponding days to the page 
+						$("#hum1").text(hum1);
+						$("#hum2").text(hum2);
+						$("#hum3").text(hum3);
+						$("#hum4").text(hum4);
+						$("#hum5").text(hum5);
+						
+				})
+    }
+
+    $("#searchBtn").on("click",function(event){
+        event.preventDefault();
+        displayCityWeather();
+    })
+
+
 })
+
+
 
 

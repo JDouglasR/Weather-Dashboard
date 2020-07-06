@@ -6,7 +6,7 @@ $(document).ready(function() {
         // Variables
         var todaysDate = moment().format('MMMM Do YYYY');
         var apiKey = "561936218884bf45974f29319f32b882";
-        var cityName = $("#citySearch").val()
+        var cityName = $("#citySearch").val();
         var queryWeather = "https://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid="+apiKey;
         var queryForecast = "https://api.openweathermap.org/data/2.5/forecast?q="+cityName+"&appid="+apiKey;
 
@@ -87,14 +87,14 @@ $(document).ready(function() {
             url: queryForecast,
             method: "GET"
         }).then(function(responseForecast) {
-						console.log(responseForecast);
+						//console.log(responseForecast);
 
 						//This sets the date for corresponding days to variables.
-						var date1 = moment(todaysDate, 'MMMM Do YYYY').add(1, 'days');
-						var date2 = moment(todaysDate, 'MMMM Do YYYY').add(2, 'days');
-						var date3 = moment(todaysDate, 'MMMM Do YYYY').add(3, 'days');
-						var date4 = moment(todaysDate, 'MMMM Do YYYY').add(4, 'days');
-						var date5 = moment(todaysDate, 'MMMM Do YYYY').add(5, 'days');
+						var date1 = moment().add(1, 'days').format("MM/DD/YYYY");
+						var date2 = moment().add(2, 'days').format("MM/DD/YYYY");
+						var date3 = moment().add(3, 'days').format("MM/DD/YYYY");
+						var date4 = moment().add(4, 'days').format("MM/DD/YYYY");
+						var date5 = moment().add(5, 'days').format("MM/DD/YYYY");
 
 						//This sets icons for corresponding days to variables.
 						var icon1 = "https://openweathermap.org/img/w/"+responseForecast.weather[4].icon+".png";
@@ -144,17 +144,23 @@ $(document).ready(function() {
 						$("#hum3").text(hum3);
 						$("#hum4").text(hum4);
 						$("#hum5").text(hum5);
-						
-				})
-    }
+		});
 
+		// This is the function that saves recent searches.
+		const saveWeaterData = () => {
+			var cityList = $(".list-group");
+
+		};
+	};
+
+	// This is a click event that runs the above functions when the search button is clicked.
     $("#searchBtn").on("click",function(event){
         event.preventDefault();
         displayCityWeather();
-    })
+    });
 
 
-})
+});
 
 
 

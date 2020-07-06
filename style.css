@@ -10,7 +10,7 @@ body {
     display: inline-block;
 }
 
-.container-search {
+.search {
     width: 100%;
     padding-top: 30px;
     padding-right: 15px;
@@ -19,7 +19,6 @@ body {
     margin-left: auto;
     position: relative;
     box-sizing: border-box;
-    display: inline-block;
 }
 
 .cityName,
@@ -42,7 +41,7 @@ body {
   height: 50px;
 }
 
-.container-results {
+.results {
   width: 100%;
   padding-top: 30px;
   padding-right: 15px;
@@ -54,7 +53,7 @@ body {
   display: inline-block;
 }
 
-.container-days {
+.days {
   width: 100%;
   height: auto;
   padding-top: 30px;
@@ -68,7 +67,6 @@ body {
 
 .forecast {
   width: 100%;
-  padding-top: 30px;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;

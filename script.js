@@ -163,7 +163,7 @@ $(document).ready(function() {
 			cityButtons = JSON.parse(storedCities);
 			
 			renderCityBtn();
-			displayCityWeather(cityButtons[0]);
+			displayCityWeather(cityButtons[0].reverse());
 		}
 		
     }

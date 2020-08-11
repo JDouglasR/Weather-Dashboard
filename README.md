@@ -1,4 +1,5 @@
 # __*Weather Dashboard*__
+![GitHub](https://img.shields.io/github/license/jdouglasr/weather-dashboard)
 
 ## __Detials About This Assignment__
 The purpose of this homework assignment was to use the OpenWeather API to retrieve weather data for cities and display it to a user in an organized and concise manner, using icons and labels to specify conditions.  Then, to use localStorage to store persistent data for later viewing.
